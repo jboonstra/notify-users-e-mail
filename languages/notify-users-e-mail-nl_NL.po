@@ -1,28 +1,32 @@
+#
+# Translators:
+# Thom, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: Notify Users E-Mail v3.0.0\n"
-"POT-Creation-Date: 2014-12-25 22:13-0300\n"
-"PO-Revision-Date: 2014-12-25 22:14-0300\n"
+"Project-Id-Version: Post Notification by Email\n"
+"POT-Creation-Date: 2014-11-24 21:40-0300\n"
+"PO-Revision-Date: 2014-12-25 22:55-0300\n"
 "Last-Translator: Valerio <valeriosza@gmail.com>\n"
-"Language-Team: \n"
-"Language: en_US\n"
+"Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/post-"
+"notification-email/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.5\n"
 "X-Poedit-Basepath: ../\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;esc_attr__\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: includes/class-notify-users-e-mail-admin.php:77
 msgid "Choose a file"
-msgstr ""
+msgstr "Bestand kiezen"
 
 #: includes/class-notify-users-e-mail-admin.php:78
 msgid "Add file"
-msgstr ""
+msgstr "Bestand toevoegen"
 
 #: includes/class-notify-users-e-mail-admin.php:91
 #: includes/class-notify-users-e-mail-admin.php:92
@@ -32,7 +36,7 @@ msgstr ""
 
 #: includes/class-notify-users-e-mail-admin.php:118
 msgid "Welcome"
-msgstr ""
+msgstr "Welkom"
 
 #: includes/class-notify-users-e-mail-admin.php:133
 msgid "Post Notification by Email Settings"
@@ -41,7 +45,7 @@ msgstr ""
 #: includes/class-notify-users-e-mail-admin.php:134
 #: includes/class-notify-users-e-mail-admin.php:571
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: includes/class-notify-users-e-mail-admin.php:158
 #: includes/class-notify-users-e-mail-admin.php:170
@@ -51,19 +55,19 @@ msgstr ""
 
 #: includes/class-notify-users-e-mail-admin.php:163
 msgid "to display the title"
-msgstr ""
+msgstr "om de titel te weergeven"
 
 #: includes/class-notify-users-e-mail-admin.php:164
 msgid "to display the URL"
-msgstr ""
+msgstr "om de URL te weergeven"
 
 #: includes/class-notify-users-e-mail-admin.php:165
 msgid "to display the content"
-msgstr ""
+msgstr "om de inhoud te weergeven"
 
 #: includes/class-notify-users-e-mail-admin.php:166
 msgid "to display the date of publication"
-msgstr ""
+msgstr "om de datum van publicatie te weergeven"
 
 #: includes/class-notify-users-e-mail-admin.php:175
 msgid "to display the post title"
@@ -79,11 +83,11 @@ msgstr ""
 
 #: includes/class-notify-users-e-mail-admin.php:185
 msgid "Email Settings"
-msgstr ""
+msgstr "E-mailinstellingen"
 
 #: includes/class-notify-users-e-mail-admin.php:193
 msgid "Sent to"
-msgstr ""
+msgstr "Verzonden naar"
 
 #: includes/class-notify-users-e-mail-admin.php:199
 msgid ""
@@ -94,7 +98,7 @@ msgstr ""
 
 #: includes/class-notify-users-e-mail-admin.php:207
 msgid "Send to users"
-msgstr ""
+msgstr "Verzenden naar gebruikers"
 
 #: includes/class-notify-users-e-mail-admin.php:213
 msgid ""
@@ -124,15 +128,15 @@ msgstr ""
 
 #: includes/class-notify-users-e-mail-admin.php:287
 msgid "Post Types"
-msgstr ""
+msgstr "Bericht Typen"
 
 #: includes/class-notify-users-e-mail-admin.php:296
 msgid "Posts"
-msgstr ""
+msgstr "Berichten"
 
 #: includes/class-notify-users-e-mail-admin.php:300
 msgid "Pages"
-msgstr ""
+msgstr "Pagina's"
 
 #: includes/class-notify-users-e-mail-admin.php:303
 msgid "Which Post Types will trigger a notification"
@@ -146,7 +150,7 @@ msgstr ""
 #: includes/class-notify-users-e-mail-admin.php:344
 #, php-format
 msgid "Select the %s"
-msgstr ""
+msgstr "Selecteer de %s"
 
 #: includes/class-notify-users-e-mail-admin.php:442
 msgid "Choose some Options"
@@ -154,11 +158,11 @@ msgstr ""
 
 #: includes/class-notify-users-e-mail-admin.php:517
 msgid "Select image"
-msgstr ""
+msgstr "Afbeelding selecteren"
 
 #: includes/class-notify-users-e-mail-admin.php:517
 msgid "Remove image"
-msgstr ""
+msgstr "Afbeelding verwijderen"
 
 #: includes/views/admin.php:23
 msgid ""
@@ -168,7 +172,7 @@ msgstr ""
 
 #: includes/views/welcome.php:22
 msgid "Welcome to"
-msgstr ""
+msgstr "Welkom bij"
 
 #: includes/views/welcome.php:23
 msgid ""
@@ -182,7 +186,7 @@ msgstr ""
 
 #: includes/views/welcome.php:31
 msgid "What's new in this release."
-msgstr ""
+msgstr "Wat is er nieuw in deze versie."
 
 #: includes/views/welcome.php:32
 msgid ""
@@ -222,26 +226,26 @@ msgstr ""
 
 #: includes/views/welcome.php:58
 msgid "Email Address"
-msgstr ""
+msgstr "E-mailadres"
 
 #: includes/views/welcome.php:66
 msgid "Subscribe"
-msgstr ""
+msgstr "Abonneren"
 
-#: notify-users-e-mail.php:205
+#: notify-users-e-mail.php:207
 #, php-format
 msgid "New post published at %s on {date}"
 msgstr ""
 
-#: notify-users-e-mail.php:206
+#: notify-users-e-mail.php:208
 msgid "A new post {title} - {link_post} has been published on {date}."
 msgstr ""
 
-#: notify-users-e-mail.php:207
+#: notify-users-e-mail.php:209
 #, php-format
 msgid "New comment published at %s"
 msgstr ""
 
-#: notify-users-e-mail.php:208
+#: notify-users-e-mail.php:210
 msgid "A new comment {link_comment} has been published."
-msgstr ""
+msgstr "Een nieuwe reactie {link_comment} is gepubliceerd."

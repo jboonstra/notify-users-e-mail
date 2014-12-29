@@ -1,25 +1,25 @@
 <?php
 /*
- * Notify Users E-Mail.
+ * Post Notification by Email.
  *
- * @package   Notify_Users_EMail
+ * @package   Post Notification by Email
  * @author    Valerio Souza <eu@valeriosouza.com.br>
  * @license   GPL-2.0+
  * @link      http://wordpress.org/plugins/notify-users-e-mail/
  * @copyright 2013 CodeHost
  *
 @wordpress-plugin
-Plugin Name:       Notify Users E-Mail
+Plugin Name:       Post Notification by Email
 Plugin URI:        http://wordpress.org/plugins/notify-users-e-mail/
 Description:       Notification of new posts by e-mail to all users
-Version:           3.1.0
-Author:            Valerio Souza, claudiosanches, ThalitaPinheiro
+Version:           4.0.3
+Author:            Valerio Souza, Claudio Sanches
 Author URI:        http://valeriosouza.com.br
 Text Domain:       notify-users-e-mail
 License:           GPL-2.0+
 License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
 Domain Path:       /languages
-GitHub Plugin URI: https://github.com/valeriosouza/notify-users-e-mail
+GitHub Plugin URI: https://github.com/valeriosouza/post-notification-by-email
  */
 
 // If this file is called directly, abort.
@@ -27,12 +27,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
 
-if ( ! class_exists( 'Notify_Users_EMail' ) ) :
+define( '__NTF_USR_FILE__', __FILE__ );
 
 /**
  * Notify Users E-Mail class.
  *
- * @package Notify_Users_EMail
+ * @package Post Notification by Email
  * @author  Valerio Souza <eu@valeriosouza.com.br>
  */
 class Notify_Users_EMail {
@@ -42,7 +42,7 @@ class Notify_Users_EMail {
 	 *
 	 * @var string
 	 */
-	const VERSION = '3.1.0';
+	const VERSION = '4.0.3';
 
 	/**
 	 * Instance of this class.
@@ -71,10 +71,7 @@ class Notify_Users_EMail {
 		}
 
 		// Nofity users when publish a post.
-		add_action( 'publish_post', array( $this, 'send_notification_post' ), 10, 2 );
-
-		// Nofity users when publish a page.
-		add_action( 'publish_page', array( $this, 'send_notification_page' ), 10, 2 );
+		add_action( 'wp_insert_post', array( $this, 'send_notification_post' ), 10, 2 );
 
 		// Nofity users when publish a comment.
 		add_action( 'wp_insert_comment', array( $this, 'send_notification_comment' ), 10, 2 );
@@ -181,15 +178,37 @@ class Notify_Users_EMail {
 		$plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
 		check_admin_referer( 'activate-plugin_' . $plugin );
 
+		$args = array(
+			'type'                     => 'post',
+			'child_of'                 => 0,
+			'parent'                   => '',
+			'orderby'                  => 'id',
+			'order'                    => 'ASC',
+			'hide_empty'               => 1,
+			'hierarchical'             => 1,
+			'exclude'                  => '',
+			'include'                  => '',
+			'number'                   => '',
+			'taxonomy'                 => 'category',
+			'pad_counts'               => false,
+
+		);
+		$list_categories = get_categories( $args );
+		$array_category = array();
+		foreach ( $list_categories as $item_category ) {
+			$array_category[] = $item_category->cat_ID;
+		};
+
 		$options = array(
-			'send_to'          => '',
-			'send_to_users'    => array_keys( get_editable_roles() ),
-			'subject_post'     => sprintf( __( 'New post published at %s on {date}', 'notify-users-e-mail' ), get_bloginfo( 'name' ) ),
-			'body_post'        => __( 'A new post {title} - {link_post} has been published on {date}.', 'notify-users-e-mail' ),
-			'subject_page'     => sprintf( __( 'New page published at %s on {date}', 'notify-users-e-mail' ), get_bloginfo( 'name' ) ),
-			'body_page'        => __( 'A new page {title} - {link_page} has been published on {date}.', 'notify-users-e-mail' ),
-			'subject_comment'  => sprintf( __( 'New comment published at %s', 'notify-users-e-mail' ), get_bloginfo( 'name' ) ),
-			'body_comment'     => __( 'A new comment {link_comment} has been published.', 'notify-users-e-mail' ),
+			'send_to'          				=> '',
+			'send_to_users'    				=> array_keys( get_editable_roles() ),
+			'subject_post'     				=> sprintf( __( 'New post published at %s on {date}', 'notify-users-e-mail' ), get_bloginfo( 'name' ) ),
+			'body_post'        				=> __( 'A new post {title} - {link_post} has been published on {date}.', 'notify-users-e-mail' ),
+			'subject_comment'  				=> sprintf( __( 'New comment published at %s', 'notify-users-e-mail' ), get_bloginfo( 'name' ) ),
+			'body_comment'     				=> __( 'A new comment {link_comment} has been published.', 'notify-users-e-mail' ),
+			'conditional_post_type'			=> array( 'post', 'page' ),
+			'conditional_taxonomy_post_tag' => '',
+			'conditional_taxonomy_category' => $array_category,
 		);
 
 		add_option( 'notify_users_email', $options );
@@ -213,8 +232,6 @@ class Notify_Users_EMail {
 					'send_to_users'   => array_keys( get_editable_roles() ),
 					'subject_post'    => get_option( 'notify_users_subject_post' ),
 					'body_post'       => get_option( 'notify_users_body_post' ),
-					'subject_page'    => get_option( 'notify_users_subject_page' ),
-					'body_page'       => get_option( 'notify_users_body_page' ),
 					'subject_comment' => get_option( 'notify_users_subject_comment' ),
 					'body_comment'    => get_option( 'notify_users_body_comment' ),
 				);
@@ -223,8 +240,6 @@ class Notify_Users_EMail {
 				delete_option( 'notify_users_mail' );
 				delete_option( 'notify_users_subject_post' );
 				delete_option( 'notify_users_body_post' );
-				delete_option( 'notify_users_subject_page' );
-				delete_option( 'notify_users_body_page' );
 				delete_option( 'notify_users_subject_comment' );
 				delete_option( 'notify_users_body_comment' );
 
@@ -232,6 +247,8 @@ class Notify_Users_EMail {
 				update_option( 'notify_users_email', $options );
 				update_option( 'notify_users_email_version', self::VERSION );
 			}
+		} elseif ($version <> self::VERSION) {
+			update_option( 'notify_users_email_version', self::VERSION );
 		}
 	}
 
@@ -269,7 +286,7 @@ class Notify_Users_EMail {
 	protected function apply_content_placeholders( $string, $post ) {
 		$string = str_replace( '{title}', sanitize_text_field( $post->post_title ), $string );
 		$string = str_replace( '{link_post}', esc_url( get_permalink( $post->ID ) ), $string );
-		$string = str_replace( '{link_page}', esc_url( get_permalink( $post->ID ) ), $string );
+		$string = str_replace( '{content_post}', apply_filters( 'the_content',get_post_field('post_content', $post->ID)), $string );
 		$string = str_replace( '{date}', $this->get_formated_date( $post->post_date ), $string );
 
 		return $string;
@@ -332,6 +349,26 @@ class Notify_Users_EMail {
 	}
 
 	/**
+	 * Apply body texts.
+	 *
+	 * @param  string  $text  String to apply the placeholders.
+	 * @param  WP_Post $post    Post/page data.
+	 *
+	 * @return string           New content.
+	 * In Development - Not Working
+	 */
+	public function body_text( $post ) {
+		$text = '<p>Head';
+		$text .= $this->apply_content_placeholders( $settings['body_post'], $post );
+		$text .= 'Body';
+		$text .= '</p>';
+		$text .= 'Texto do footer';
+
+		return $text;
+	}
+
+
+	/**
 	 * Nofity users when publish a post.
 	 *
 	 * @param  int     $id   Post ID.
@@ -340,63 +377,78 @@ class Notify_Users_EMail {
 	 * @return void
 	 */
 	public function send_notification_post( $id, $post ) {
-		if ( 'publish' == $_POST['post_status'] && 'publish' != $_POST['original_post_status'] ) {
-
-			// Prevents sent twice.
-			$sended = get_post_meta( $id, '_notify_users_email_sended', true );
-			if ( $sended ) {
-				return;
-			}
-
-			$settings     = get_option( 'notify_users_email' );
-			$emails       = $this->notification_list( $settings['send_to_users'], $settings['send_to'] );
-			$subject_post = $this->apply_content_placeholders( $settings['subject_post'], $post );
-			$body_post    = $this->apply_content_placeholders( $settings['body_post'], $post );
-			$headers      = 'Bcc: ' . implode( ',', $emails );
-
-			// Send the emails.
-			if ( apply_filters( 'notify_users_email_use_wp_mail', true ) ) {
-				wp_mail( '', $subject_post, $body_post, $headers );
-			} else {
-				do_action( 'notify_users_email_custom_mail_engine', $emails, $subject_post, $body_post );
-			}
-
-			add_post_meta( $id, '_notify_users_email_sended', true );
+		if ( 'publish' != $post->post_status ) {
+ 			return;
 		}
-	}
 
-	/**
-	 * Nofity users when publish a page.
-	 *
-	 * @param  int     $id   Post ID.
-	 * @param  WP_Post $post Post data.
-	 *
-	 * @return void
-	 */
-	public function send_notification_page( $id, $post ) {
-		if ( 'publish' == $_POST['post_status'] && 'publish' != $_POST['original_post_status'] ) {
-
-			// Prevents sent twice.
-			$sended = get_post_meta( $id, '_notify_users_email_sended', true );
-			if ( $sended ) {
-				return;
-			}
-
-			$settings     = get_option( 'notify_users_email' );
-			$emails       = $this->notification_list( $settings['send_to_users'], $settings['send_to'] );
-			$subject_page = $this->apply_content_placeholders( $settings['subject_page'], $post );
-			$body_page    = $this->apply_content_placeholders( $settings['body_page'], $post );
-			$headers      = 'Bcc: ' . implode( ',', $emails );
-
-			// Send the emails.
-			if ( apply_filters( 'notify_users_email_use_wp_mail', true ) ) {
-				wp_mail( '', $subject_page, $body_page, $headers );
-			} else {
-				do_action( 'notify_users_email_custom_mail_engine', $emails, $subject_page, $body_page );
-			}
-
-			add_post_meta( $id, '_notify_users_email_sended', true );
+		if ( empty( $_POST['original_post_status'] ) || 'publish' == $_POST['original_post_status'] ){
+			return;
 		}
+
+		// Prevent sending twice
+		$sent = get_post_meta( $id, '_notify_users_email_sended', true );
+		if ( $sent ) {
+			return;
+		}
+
+		$settings = get_option( 'notify_users_email', array() );
+
+		if ( ! in_array( $post->post_type, (array) $settings['conditional_post_type'] ) ){
+			return;
+		}
+
+		$obj_taxonomies = get_object_taxonomies( $post->post_type, 'names' );
+
+		$run = array();
+		foreach ( $obj_taxonomies as $taxonomy ) {
+			$run[ $taxonomy ] = true;
+		}
+
+		if ( 0 !== count( $run ) ){
+			foreach ( $settings as $key => $value ) {
+				if ( false === strrpos( $key, 'conditional_taxonomy_' ) ) {
+					continue;
+				}
+
+				$terms = array_filter( array_unique( array_map( 'absint', array_map( 'trim', (array) $value ) ) ) );
+
+				if ( empty( $terms ) ){
+					continue;
+				}
+
+				$taxonomy = str_replace( 'conditional_taxonomy_', '', $key );
+				$run[ $taxonomy ] = false;
+
+				foreach ( $terms as $key => $term ) {
+					if ( has_term( $term, $taxonomy, $post ) ){
+						$run[ $taxonomy ] = true;
+					}
+				}
+			}
+		} else {
+			$run = array( true );
+		}
+
+		if ( in_array( false, $run ) ){
+			return;
+		}
+
+		$emails       = $this->notification_list( $settings['send_to_users'], $settings['send_to'] );
+		$subject_post = $this->apply_content_placeholders( $settings['subject_post'], $post );
+		$body_post    = $this->apply_content_placeholders( $settings['body_post'], $post );
+		$headers 	  = array(
+			'Content-Type: text/html; charset=UTF-8',
+			'Bcc: ' . implode( ',', $emails ),
+		);
+
+		// Send the emails.
+		if ( apply_filters( 'notify_users_email_use_wp_mail', true ) ) {
+			wp_mail( '', $subject_post, $body_post, $headers );
+		} else {
+			do_action( 'notify_users_email_custom_mail_engine', $emails, $subject_post, $body_post );
+		}
+
+		add_post_meta( $id, '_notify_users_email_sended', true );
 	}
 
 	/**
@@ -412,7 +464,10 @@ class Notify_Users_EMail {
 		$emails          = $this->notification_list( $settings['send_to_users'], $settings['send_to'] );
 		$subject_comment = $this->apply_comment_placeholders( $settings['subject_comment'], $comment );
 		$body_comment    = $this->apply_comment_placeholders( $settings['body_comment'], $comment );
-		$headers         = 'Bcc: ' . implode( ',', $emails );
+		$headers 		 = array(
+			'Content-Type: text/html; charset=UTF-8',
+			'Bcc: ' . implode( ',', $emails )
+		);
 
 		// Send the emails.
 		if ( apply_filters( 'notify_users_email_use_wp_mail', true ) ) {
@@ -432,5 +487,3 @@ register_activation_hook( __FILE__, array( 'Notify_Users_EMail', 'activate' ) );
  * Initialize the plugin.
  */
 add_action( 'plugins_loaded', array( 'Notify_Users_EMail', 'get_instance' ), 0 );
-
-endif;

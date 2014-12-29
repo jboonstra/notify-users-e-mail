@@ -1,17 +1,21 @@
+#
+# Translators:
+# Junxiu Liu <junxiu6@gmail.com>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: Notify Users E-Mail v3.0.0\n"
-"POT-Creation-Date: 2014-12-25 22:13-0300\n"
-"PO-Revision-Date: 2014-12-25 22:14-0300\n"
+"Project-Id-Version: Post Notification by Email\n"
+"POT-Creation-Date: 2014-11-24 21:40-0300\n"
+"PO-Revision-Date: 2014-12-25 22:55-0300\n"
 "Last-Translator: Valerio <valeriosza@gmail.com>\n"
-"Language-Team: \n"
-"Language: en_US\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/post-"
+"notification-email/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.6.5\n"
 "X-Poedit-Basepath: ../\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;esc_attr__\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -32,7 +36,7 @@ msgstr ""
 
 #: includes/class-notify-users-e-mail-admin.php:118
 msgid "Welcome"
-msgstr ""
+msgstr "欢迎"
 
 #: includes/class-notify-users-e-mail-admin.php:133
 msgid "Post Notification by Email Settings"
@@ -41,21 +45,21 @@ msgstr ""
 #: includes/class-notify-users-e-mail-admin.php:134
 #: includes/class-notify-users-e-mail-admin.php:571
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #: includes/class-notify-users-e-mail-admin.php:158
 #: includes/class-notify-users-e-mail-admin.php:170
 #, php-format
 msgid "%s You can use the following placeholders:%s %s"
-msgstr ""
+msgstr "%s 你可以使用以下的占位符:%s %s"
 
 #: includes/class-notify-users-e-mail-admin.php:163
 msgid "to display the title"
-msgstr ""
+msgstr "显示标题"
 
 #: includes/class-notify-users-e-mail-admin.php:164
 msgid "to display the URL"
-msgstr ""
+msgstr "显示网址"
 
 #: includes/class-notify-users-e-mail-admin.php:165
 msgid "to display the content"
@@ -63,11 +67,11 @@ msgstr ""
 
 #: includes/class-notify-users-e-mail-admin.php:166
 msgid "to display the date of publication"
-msgstr ""
+msgstr "显示发表日期"
 
 #: includes/class-notify-users-e-mail-admin.php:175
 msgid "to display the post title"
-msgstr ""
+msgstr "显示发表文章的标题"
 
 #: includes/class-notify-users-e-mail-admin.php:176
 msgid "to display the comment URL"
@@ -75,15 +79,15 @@ msgstr ""
 
 #: includes/class-notify-users-e-mail-admin.php:177
 msgid "to display the date of comment publication"
-msgstr ""
+msgstr "显示评论发表的日期"
 
 #: includes/class-notify-users-e-mail-admin.php:185
 msgid "Email Settings"
-msgstr ""
+msgstr "邮件设置"
 
 #: includes/class-notify-users-e-mail-admin.php:193
 msgid "Sent to"
-msgstr ""
+msgstr "发送给"
 
 #: includes/class-notify-users-e-mail-admin.php:199
 msgid ""
@@ -94,7 +98,7 @@ msgstr ""
 
 #: includes/class-notify-users-e-mail-admin.php:207
 msgid "Send to users"
-msgstr ""
+msgstr "发送的用户"
 
 #: includes/class-notify-users-e-mail-admin.php:213
 msgid ""
@@ -128,11 +132,11 @@ msgstr ""
 
 #: includes/class-notify-users-e-mail-admin.php:296
 msgid "Posts"
-msgstr ""
+msgstr "文章"
 
 #: includes/class-notify-users-e-mail-admin.php:300
 msgid "Pages"
-msgstr ""
+msgstr "页面"
 
 #: includes/class-notify-users-e-mail-admin.php:303
 msgid "Which Post Types will trigger a notification"
@@ -164,7 +168,7 @@ msgstr ""
 msgid ""
 "This plugin notifies registered users via email of new posts, pages and "
 "comments posted."
-msgstr ""
+msgstr "新的文章，页面和评论发布后，本插件通过邮件通知注册用户"
 
 #: includes/views/welcome.php:22
 msgid "Welcome to"
@@ -226,22 +230,22 @@ msgstr ""
 
 #: includes/views/welcome.php:66
 msgid "Subscribe"
-msgstr ""
-
-#: notify-users-e-mail.php:205
-#, php-format
-msgid "New post published at %s on {date}"
-msgstr ""
-
-#: notify-users-e-mail.php:206
-msgid "A new post {title} - {link_post} has been published on {date}."
-msgstr ""
+msgstr "d你个月"
 
 #: notify-users-e-mail.php:207
 #, php-format
-msgid "New comment published at %s"
-msgstr ""
+msgid "New post published at %s on {date}"
+msgstr "新文章发布于at %s on {date}"
 
 #: notify-users-e-mail.php:208
+msgid "A new post {title} - {link_post} has been published on {date}."
+msgstr "一篇新文章 {title} - {link_post} 发布于 {date}."
+
+#: notify-users-e-mail.php:209
+#, php-format
+msgid "New comment published at %s"
+msgstr "新评论发布于 %s"
+
+#: notify-users-e-mail.php:210
 msgid "A new comment {link_comment} has been published."
-msgstr ""
+msgstr "一个新评论已经发布 {link_comment} ."
