@@ -1,18 +1,19 @@
 # 
 # Translators:
-# Valério Souza <valeriosza@gmail.com>, 2014
+# alepane <alepane@gmail.com>, 2015
+# alepane <alepane@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Post Notification Email\n"
 "POT-Creation-Date: 2015-02-20 20:14-0300\n"
 "PO-Revision-Date: 2015-02-20 22:24+0000\n"
 "Last-Translator: Valério Souza <valeriosza@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/post-notification-email/language/pt_BR/)\n"
+"Language-Team: Italian (Italy) (http://www.transifex.com/projects/p/post-notification-email/language/it_IT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: it_IT\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.5\n"
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-KeywordsList: __;_e;esc_attr__;_x\n"
@@ -21,220 +22,220 @@ msgstr ""
 
 #: includes/class-notify-users-e-mail-admin.php:77
 msgid "Choose a file"
-msgstr "Escolha um arquivo"
+msgstr "Seleziona un file"
 
 #: includes/class-notify-users-e-mail-admin.php:78
 msgid "Add file"
-msgstr "Adicionar arquivo"
+msgstr "Aggiungi un file"
 
 #: includes/class-notify-users-e-mail-admin.php:91
 msgid "Post Notification by Email"
-msgstr "Notificação de Post por Email"
+msgstr "Post Notification by Email"
 
 #: includes/class-notify-users-e-mail-admin.php:118
 msgid "Welcome"
-msgstr "Bem-vindo"
+msgstr "Benvenuto"
 
 #: includes/class-notify-users-e-mail-admin.php:134
 #: includes/class-notify-users-e-mail-admin.php:575
 msgid "Settings"
-msgstr "Configurações"
+msgstr "Impostazioni"
 
 #: includes/class-notify-users-e-mail-admin.php:158
 #: includes/class-notify-users-e-mail-admin.php:170
 #, php-format
 msgid "%s You can use the following placeholders:%s %s"
-msgstr "%s Você pode usar os seguintes parâmetros:%s %s"
+msgstr "%s Puoi usare i seguenti segnaposto:%s %s"
 
 #: includes/class-notify-users-e-mail-admin.php:163
 msgid "to display the title"
-msgstr "para mostrar o título"
+msgstr "per visualizzare il titolo"
 
 #: includes/class-notify-users-e-mail-admin.php:164
 msgid "to display the URL"
-msgstr "para mostrar a URL"
+msgstr "per visualizzare l'URL"
 
 #: includes/class-notify-users-e-mail-admin.php:165
 msgid "to display the content"
-msgstr "para mostrar o conteúdo."
+msgstr "per visualizzare il contenuto"
 
 #: includes/class-notify-users-e-mail-admin.php:166
 msgid "to display the date of publication"
-msgstr "para mostrar a data de publicação"
+msgstr "per visualizzare la data di pubblicazione"
 
 #: includes/class-notify-users-e-mail-admin.php:175
 msgid "to display the post title"
-msgstr "para mostrar o título do post"
+msgstr "per visualizzare il titolo dell'articolo"
 
 #: includes/class-notify-users-e-mail-admin.php:176
 msgid "to display the comment URL"
-msgstr "para mostrar a URL do comentário"
+msgstr "per visualizzare l'URL del commento"
 
 #: includes/class-notify-users-e-mail-admin.php:177
 msgid "to display the date of comment publication"
-msgstr "para mostrar a data de publicação do comentário"
+msgstr "per visualizzare la data di pubblicazione del commento"
 
 #: includes/class-notify-users-e-mail-admin.php:185
 msgid "Email Settings"
-msgstr "Configurações de E-mail"
+msgstr "Impostazione Email"
 
 #: includes/class-notify-users-e-mail-admin.php:193
 msgid "Sent to"
-msgstr "Enviar para"
+msgstr "Inviato a"
 
 #: includes/class-notify-users-e-mail-admin.php:199
 msgid ""
 "Enter email address (separated by commas) for emails to be sent regardless "
 "of settings below. A registered user may receive two emails if you list it "
 "here."
-msgstr "Digite os endereços de e-mail (separado por virgulas) para os disparos sejam enviados independentemente das configurações abaixo. Um usuário registrado pode receber até dois e-mails se você cadastra-lo aqui."
+msgstr "Inserisci gli indirizzi email (separati da virgola) per le email da inviare indistintamente dalle impostazioni qua sotto. Un utente registrato potrebbe ricevere la newsletter due volte se lo indichi qua."
 
 #: includes/class-notify-users-e-mail-admin.php:207
 msgid "Send to users"
-msgstr "Enviar para os usuários"
+msgstr "Invia agli utenti"
 
 #: includes/class-notify-users-e-mail-admin.php:213
 msgid ""
 "Select the type of user that will receive notifications. You can choose more"
 " than one type using ctrl+click."
-msgstr "Selecione o nível de usuário que irá receber a notificação. Você pode escolher mais de uma opção usando ctrl+clique."
+msgstr "Seleziona il tipo di utenti che riceveranno le notifiche. Puoi selezionare più di un tipo usano ctrl+click."
 
 #: includes/class-notify-users-e-mail-admin.php:222
 msgid "Email subject for new posts, pages and post types."
-msgstr "Assunto do e-mail para novos posts, páginas e tipo de posts personalizado."
+msgstr "Oggetto delle email per i nuovi articoli, pagine e tipi di articoli."
 
 #: includes/class-notify-users-e-mail-admin.php:236
 msgid "Email body for new posts, pages and post types."
-msgstr "Corpo do e-amil para novos posts, páginas e tipo de posts personalizados."
+msgstr "Corpo delle email per i nuovi articoli, pagine e tipi di articoli."
 
 #: includes/class-notify-users-e-mail-admin.php:250
 msgid "Email subject for new comments"
-msgstr "Assunto do e-mail para novos comentários"
+msgstr "Oggetto delle email per i nuovi commenti"
 
 #: includes/class-notify-users-e-mail-admin.php:264
 msgid "Email body for new comments"
-msgstr "Corpo do e-mail para novos comentários"
+msgstr "Corpo delle email per i nuovi commenti"
 
 #: includes/class-notify-users-e-mail-admin.php:279
 msgid "Conditional Settings"
-msgstr "Configurações de Condições"
+msgstr "Impostazioni condizionali"
 
 #: includes/class-notify-users-e-mail-admin.php:300
 msgid "Post Types"
-msgstr "Tipos de Postagens"
+msgstr "Tipi di articoli"
 
 #: includes/class-notify-users-e-mail-admin.php:307
 msgid "Which Post Types will trigger a notification"
-msgstr "Quais tipos de posts personalizados irá disparar uma notificação"
+msgstr "Quale tipo di articolo lancia una notifica"
 
 #: includes/class-notify-users-e-mail-admin.php:345
 #, php-format
 msgid "Which terms from %s will send a notification"
-msgstr "Quais termos do %s irá disparar uma notificação"
+msgstr "Quale termine da %s lancia una notifica"
 
 #: includes/class-notify-users-e-mail-admin.php:348
 #, php-format
 msgid "Select the %s"
-msgstr "Selecione o %s"
+msgstr "Seleziona il %s"
 
 #: includes/class-notify-users-e-mail-admin.php:446
 msgid "Choose some Options"
-msgstr "Escolha algumas opções"
+msgstr "Seleziona qualche opzione"
 
 #: includes/class-notify-users-e-mail-admin.php:521
 msgid "Select image"
-msgstr "Selecione imagem"
+msgstr "Seleziona immagine"
 
 #: includes/class-notify-users-e-mail-admin.php:521
 msgid "Remove image"
-msgstr "Remover imagem"
+msgstr "Rimuovi immagine"
 
 #: includes/views/admin.php:23
 msgid ""
 "This plugin notifies registered users via email of new posts, pages and "
 "comments posted."
-msgstr "Esse plugin notifica todos os usuários cadastrados via e-mail de novos posts, páginas e comentários publicados."
+msgstr "Questo plugin notifica agli utenti registrati, via email, l'aggiunta di nuovi articoli, pagine e commenti."
 
 #: includes/views/welcome.php:22
 msgid "Welcome to"
-msgstr "Bem vindo ao"
+msgstr "Benvenuto su"
 
 #: includes/views/welcome.php:23
 msgid ""
 "This plugin notifies registered users via email of new posts, comments, and "
 "any post type posted."
-msgstr "Esse plugin notifica os usuários cadastrados via e-mail sobre novos posts, comentários e tipos de post personalizado quando são publicados."
+msgstr "Questo plugin notifica agli utenti registrati, via email, l'aggiunta di nuovi articoli, pagine, commenti e qualsiasi altro tipo di articolo."
 
 #: includes/views/welcome.php:27 includes/views/welcome.php:75
 msgid "Go to Configuration Plugin"
-msgstr "Ir para as Configurações do Plugin"
+msgstr "Vai alla configurazione del plugin"
 
 #: includes/views/welcome.php:31
 msgid "What's new in this release."
-msgstr "O que tem nessa nova versão."
+msgstr "Cosa c'è di nuovo in questa versione."
 
 #: includes/views/welcome.php:32
 msgid ""
 "Now it is possible to choose which post type and taxonomy which emails are "
 "sent."
-msgstr "Agora é possível escolher qual tipo de post personalizado e taxonomia irá disparar os emails."
+msgstr "Ora è possibile selezionare quale tipo di articolo e tassonomia sono inviati a quale indirizzo email. "
 
 #: includes/views/welcome.php:35
 msgid "More beautiful with HTML content!"
-msgstr "Mais bonito, com conteúdo do e-mail em HTML!"
+msgstr "È tutto più bello con il contenuto in HTML!"
 
 #: includes/views/welcome.php:36
 msgid ""
 "New HTML editors allow you to customize the contents of the email, and even "
 "embed images, videos and what more do you want to. "
-msgstr "Novo editor HTML permite você personalizar o conteúdo do email, e até mesmo incorporar imagens, vídeos e o que mais você quiser."
+msgstr "Il nuovo editor HTML ti permette do personalizzare i contenuti delle email ed anche includere immagini, video e qualsiasi cosa tu voglia!"
 
 #: includes/views/welcome.php:41
 msgid "Contents of the post directly in the body of the email!"
-msgstr "Conteúdo do post diretamente no corpo do e-mail!"
+msgstr "Contenuti dell'articolo direttamente nel corpo dell'email!"
 
 #: includes/views/welcome.php:42
 msgid ""
 "It is now possible to send the entire contents of the post directly in your "
 "email. This is amazing."
-msgstr "Agora é possível enviar todo o conteúdo do post diretamente no seu e-mail. Isto é incrível."
+msgstr "Ora è possibile inviare tutti i contenuti di un post direttamente nell'email. Fantastico!"
 
 #: includes/views/welcome.php:45
 msgid "Keep up with the news"
-msgstr "Fique por dentro das novidades"
+msgstr "Tieniti al passo con le notizie"
 
 #: includes/views/welcome.php:46
 msgid ""
 "We are preparing many new features, stay tuned by subscribing to our email "
 "Marketing. We promise not to send Spam."
-msgstr "Estamos preparando novas funcionalidades, para ficar sabendo em primeira mão, assine nossa Newsletter. Prometemos não enviar Spam."
+msgstr "Stiamo preparando molte nuove funzionalità, resta aggiornato iscrivendoti al nostro indirizzo marketing. Promettiamo di non inviarti spam. "
 
 #: includes/views/welcome.php:58
 msgid "Email Address"
-msgstr "Endereço de E-mail"
+msgstr "Indirizzo Email"
 
 #: includes/views/welcome.php:66
 msgid "Subscribe"
-msgstr "Cadastrar"
+msgstr "Iscriviti"
 
 #: notify-users-e-mail.php:207
 #, php-format
 msgid "New post published at %s on {date}"
-msgstr "Novo post publicado no %s em {date}"
+msgstr "Nuovo articolo pubblicato su %s il {date}"
 
 #: notify-users-e-mail.php:208
 msgid "A new post {title} - {link_post} has been published on {date}."
-msgstr "Um novo post {title} - {link_post} foi publicado em {date}."
+msgstr "Un nuovo articolo {title} - {link_post} è stato pubblicato il {date}."
 
 #: notify-users-e-mail.php:209
 #, php-format
 msgid "New comment published at %s"
-msgstr "Novo comentário publicado no %s"
+msgstr "Nuovo commento pubblicato su %s"
 
 #: notify-users-e-mail.php:210
 msgid "A new comment {link_comment} has been published."
-msgstr "Um novo comentário {link_comment} foi publicado em {date}."
+msgstr "Un nuovo commento {link_comment} è stato pubblicato."
 
 #: notify-users-e-mail.php:275
 msgid "\\a\\t"
-msgstr "\\e\\m"
+msgstr "\\a\\l\\l\\e"

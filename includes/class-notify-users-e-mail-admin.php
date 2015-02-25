@@ -59,15 +59,15 @@ class Notify_Users_EMail_Admin {
 			// Media Upload.
 			wp_enqueue_media();
 
-			wp_register_style( 'select2', plugins_url( 'asset/css/select2.css', plugin_dir_path( __FILE__ ) ), array(  ), '3.5.2', 'all' );
-			wp_register_script( 'select2', plugins_url( 'asset/js/vendor/select2/select2.min.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), '3.5.2', true );
+			wp_register_style( 'select2', plugins_url( 'lib/css/select2.css', plugin_dir_path( __FILE__ ) ), array(  ), '3.5.2', 'all' );
+			wp_register_script( 'select2', plugins_url( 'lib/js/vendor/select2/select2.min.js', plugin_dir_path( __FILE__ ) ), array( 'jquery' ), '3.5.2', true );
 
 
 
 			// Theme Options.
-			wp_enqueue_style( 'notify-users-e-mail-admin', plugins_url( 'asset/css/admin.css', plugin_dir_path( __FILE__ ) ), array( 'select2' ), Notify_Users_EMail::VERSION, 'all' );
+			wp_enqueue_style( 'notify-users-e-mail-admin', plugins_url( 'lib/css/admin.css', plugin_dir_path( __FILE__ ) ), array( 'select2' ), Notify_Users_EMail::VERSION, 'all' );
 
-			wp_enqueue_script( 'notify-users-e-mail-admin', plugins_url( 'asset/js/admin.js', plugin_dir_path( __FILE__ ) ), array( 'jquery', 'select2' ), Notify_Users_EMail::VERSION, true );
+			wp_enqueue_script( 'notify-users-e-mail-admin', plugins_url( 'lib/js/admin.js', plugin_dir_path( __FILE__ ) ), array( 'jquery', 'select2' ), Notify_Users_EMail::VERSION, true );
 
 			// Localize strings.
 			wp_localize_script(
@@ -89,7 +89,7 @@ class Notify_Users_EMail_Admin {
 	public function add_plugin_welcome_menu() {
 		add_menu_page(
 			__( 'Post Notification by Email', 'notify-users-e-mail' ),
-			__( 'Post Notification by Email', 'notify-users-e-mail' ),
+			'Post Notification by Email',
 			'manage_options',
 			'notify-users-e-mail',
 			array( $this, 'display_plugin_welcome_page' ),
@@ -114,7 +114,7 @@ class Notify_Users_EMail_Admin {
 	public function add_plugin_welcome_submenu() {
 		add_submenu_page(
 			'notify-users-e-mail',
-			__( 'Post Notification by Email', 'notify-users-e-mail' ),
+			'Post Notification by Email',
 			__( 'Welcome', 'notify-users-e-mail' ),
 			'manage_options',
 			'notify-users-e-mail'
@@ -130,7 +130,7 @@ class Notify_Users_EMail_Admin {
 	public function add_plugin_admin_menu() {
 		add_submenu_page(
 			'notify-users-e-mail',
-			__( 'Post Notification by Email Settings', 'notify-users-e-mail' ),
+			'Post Notification by Email Settings',
 			__( 'Settings', 'notify-users-e-mail' ),
 			'manage_options',
 			'notify-users-e-mail-settings',
@@ -283,7 +283,20 @@ class Notify_Users_EMail_Admin {
 			'notify_users_email'
 		);
 
-		// Email Body Prefix Comment.
+                // Select All Post types.
+                $post_types_options = array(); 
+                $args = array(
+				   'public'   => true
+				);
+                $post_types = get_post_types($args, 'objects'); 
+                foreach ($post_types as $post_type) { 
+                    $post_types_options[] = array( 
+                        'id' => $post_type->name, 
+                        'text' => esc_attr__($post_type->labels->name), 
+                    );
+                } 
+
+                // Email Body Prefix Comment.
 		add_settings_field(
 			'conditional_post_type',
 			esc_attr__( 'Post Types', 'notify-users-e-mail' ),
@@ -292,16 +305,7 @@ class Notify_Users_EMail_Admin {
 			'conditional_section',
 			array(
 				'id'          => 'conditional_post_type',
-				'options'     => array(
-					array(
-						'id' => 'post',
-						'text' => esc_attr__( 'Posts' ),
-					),
-					array(
-						'id' => 'page',
-						'text' => esc_attr__( 'Pages' ),
-					),
-				),
+				'options'     => $post_types_options,
 				'description' => esc_attr__( 'Which Post Types will trigger a notification', 'notify-users-e-mail' ),
 				'default'     => array( 'post', 'page' ),
 				'multiple'    => true,

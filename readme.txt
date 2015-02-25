@@ -3,14 +3,16 @@ Contributors: valeriosza, claudiosanches
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=P5QTGDB64SU8E&lc=US&item_name=WordPress%20Plugins&no_note=0&cn=Adicionar%20instru%c3%a7%c3%b5es%20especiais%20para%20o%20vendedor%3a&no_shipping=1&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Tags: notification, users, emails, post, new posts, new pages, new comments, news, newsletter,posts, post type
 Requires at least: 3.0
-Tested up to: 4.1
-Stable tag: 4.0.3
+Tested up to: 4.1.1
+Stable tag: 4.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Send an email to all users whenever a new post is published on your WordPress.
 
 == Description ==
+
+This version especial thanks for [caramelopardalis](https://github.com/caramelopardalis)
 
 This plugin notifies registered users via email of new posts, pages, post types and comments published.
 
@@ -20,8 +22,6 @@ Are usually accepted 200 emails per hour.
 
 If your hosting server does not allow sending emails, use a plugin like SMTP http://wordpress.org/plugins/my-smtp-wp/ or read our FAQ
 
-Special thanks to [Gustavo Bordoni](https://twitter.com/webord) and investors who made cash donation.
-
 = Heads up: =
 
 Read the [FAQ](https://wordpress.org/plugins/notify-users-e-mail/faq/) before use.
@@ -30,7 +30,7 @@ Want to help? Use the [support](https://wordpress.org/support/plugin/notify-user
 
 = Now we are in: =
 
-8 languages:
+11 languages:
 
 - English
 - Portuguese
@@ -40,6 +40,9 @@ Want to help? Use the [support](https://wordpress.org/support/plugin/notify-user
 - Spanish
 - Dutch
 - Chinese
+- Italian
+- Czech
+- Japanese
 
 = Want to help? =
 
@@ -100,6 +103,14 @@ Imagine you have 100 people registered on your site and want to notify them of a
 
 This plugin simplifies sending an email with this notice.
 
+= My comments are not being sent because? =
+
+Only emails are sent for comments that do not suffer moderation rules. If for some reason he held in moderation, after the approval e-mail is not sent.
+
+Look this `wp-admin/options-discussion.php`
+
+This plugin will not change this function, you can go out on a add-on or pro version.
+
 == For Developers ==
 
 = Custom email engine/function =
@@ -119,11 +130,32 @@ If you don't want to send emails by `wp_mail()` you can do the following way:
 
 1. Enter email or choose levels of users with permission to receive emails.
 
-2. Personalize your message. Use image, colors and whatever you decide..
+2. Personalize your message. Use image, colors and whatever you decide.
 
 3. Conditions for sending the email.
 
 == Changelog ==
+
+= 4.1.2 - 23/02/2015 =
+
+* Fixed: bugs and errors.
+
+= 4.1.1 - 20/02/2015 =
+
+* New: Draft for published in Bulk Action.
+* Fixed: Error Undefined index: conditional_post_type.
+* Fixed: No email is sent for new comments.
+
+= 4.1 - 10/02/2015 =
+
+* Fixed: Resolved bug load_plugin_textdomain.
+* Fixed: Resolved bug Emails are being sent for unpublished Comments.
+* New: All Posts types in conditional.
+* Unreal: We love the Brazilian currency.
+
+= 4.0.4 - 08/01/2014 =
+
+* Fixed: Resolved bugs, errors and add new languages.
 
 = 4.0.3 - 25/12/2014 =
 
@@ -208,6 +240,27 @@ If you don't want to send emails by `wp_mail()` you can do the following way:
 * Lançada primeira versão beta
 
 == Upgrade Notice ==
+
+= 4.1.2 - 23/02/2015 =
+
+* Fixed: bugs and errors.
+
+= 4.1.1 - 20/02/2015 =
+
+* New: Draft for published in Bulk Action.
+* Fixed: Error Undefined index: conditional_post_type.
+* Fixed: No email is sent for new comments.
+
+= 4.1 =
+
+* Fixed: Resolved bug load_plugin_textdomain.
+* Fixed: Resolved bug Emails are being sent for unpublished Comments.
+* New: All Posts types in conditional.
+* Unreal: We love the Brazilian currency.
+
+= 4.0.4 =
+
+* Fixed: Resolved bugs, errors and add new languages.
 
 = 4.0.3 =
 

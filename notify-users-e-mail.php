@@ -12,7 +12,7 @@
 Plugin Name:       Post Notification by Email
 Plugin URI:        http://wordpress.org/plugins/notify-users-e-mail/
 Description:       Notification of new posts by e-mail to all users
-Version:           4.0.3
+Version:           4.1.2
 Author:            Valerio Souza, Claudio Sanches
 Author URI:        http://valeriosouza.com.br
 Text Domain:       notify-users-e-mail
@@ -20,6 +20,7 @@ License:           GPL-2.0+
 License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
 Domain Path:       /languages
 GitHub Plugin URI: https://github.com/valeriosouza/post-notification-by-email
+GitHub Branch:     beta
  */
 
 // If this file is called directly, abort.
@@ -42,7 +43,7 @@ class Notify_Users_EMail {
 	 *
 	 * @var string
 	 */
-	const VERSION = '4.0.3';
+	const VERSION = '4.1.2';
 
 	/**
 	 * Instance of this class.
@@ -71,10 +72,11 @@ class Notify_Users_EMail {
 		}
 
 		// Nofity users when publish a post.
-		add_action( 'wp_insert_post', array( $this, 'send_notification_post' ), 10, 2 );
+		add_action( 'transition_post_status', array( $this, 'send_notification_post' ), 10, 3 );
 
-		// Nofity users when publish a comment.
-		add_action( 'wp_insert_comment', array( $this, 'send_notification_comment' ), 10, 2 );
+		// Nofity users when approve a comment.
+		add_action( 'wp_insert_comment', array( $this, 'pre_send_notification_new_comment' ), 10, 2 );
+		add_action( 'transition_comment_status', array( $this, 'pre_send_notification_update_comment' ), 10, 3 );
 	}
 
 	/**
@@ -260,7 +262,7 @@ class Notify_Users_EMail {
 	public function load_plugin_textdomain() {
 		$locale = apply_filters( 'plugin_locale', get_locale(), 'notify-users-e-mail' );
 
-		load_textdomain( 'notify-users-e-mail', trailingslashit( WP_LANG_DIR ) . 'notify-users-e-mail/notify-users-e-mail-' . $locale . '.mo' );
+		load_plugin_textdomain( 'notify-users-e-mail', false, trailingslashit( WP_LANG_DIR ) . 'notify-users-e-mail/notify-users-e-mail-' . $locale . '.mo' );
 		load_plugin_textdomain( 'notify-users-e-mail', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
@@ -367,26 +369,40 @@ class Notify_Users_EMail {
 		return $text;
 	}
 
-
+	/**
+	 * Detect whether the post has published.
+	 *
+	 * @param string $new_status New status of post.
+	 * @param string $old_status Old status of post.
+	 *
+	 * @return boolean           Returns true if the post has published.
+	 */
+    protected function has_published( $new_status, $old_status ) {
+		$published = false;
+		if ( $new_status === 'publish' && $old_status !== 'publish' ) {
+			$published = true;
+		}
+		return $published;
+    }
+    
 	/**
 	 * Nofity users when publish a post.
 	 *
-	 * @param  int     $id   Post ID.
-	 * @param  WP_Post $post Post data.
+     * @param  string  $new_status New status of post
+	 * @param  string  $old_status Old status of post.
+	 * @param  WP_Post $post       Post data.
 	 *
 	 * @return void
 	 */
-	public function send_notification_post( $id, $post ) {
-		if ( 'publish' != $post->post_status ) {
+	public function send_notification_post( $new_status, $old_status, $post ) {
+		$has_published = $this->has_published( $new_status, $old_status );
+        $allowed_statuses = apply_filters( 'notify_users_email_allowed_post_statuses', $has_published, $new_status, $old_status );
+        if ( ! $allowed_statuses ) {
  			return;
 		}
 
-		if ( empty( $_POST['original_post_status'] ) || 'publish' == $_POST['original_post_status'] ){
-			return;
-		}
-
 		// Prevent sending twice
-		$sent = get_post_meta( $id, '_notify_users_email_sended', true );
+		$sent = get_post_meta( $post->ID, '_notify_users_email_sended', true );
 		if ( $sent ) {
 			return;
 		}
@@ -448,32 +464,76 @@ class Notify_Users_EMail {
 			do_action( 'notify_users_email_custom_mail_engine', $emails, $subject_post, $body_post );
 		}
 
-		add_post_meta( $id, '_notify_users_email_sended', true );
+		add_post_meta( $post->ID, '_notify_users_email_sended', true );
+	}
+
+	/**
+	 * @param int      $id Comment ID.
+	 * @param stdClass $comment Comment data.
+	 *
+	 * @return void
+	 */
+	public function pre_send_notification_new_comment( $id, $comment ) {
+		$this->send_notification_comment( $id, $comment->comment_approved );
+	}
+
+	/**
+	 * @param string   $new_status New status of comment.
+	 * @param string   $old_status Old status of comment.
+	 * @param stdClass $comment Comment data.
+	 *
+	 * @return void
+	 */
+	public function pre_send_notification_update_comment( $new_status, $old_status, $comment ) {
+		$this->send_notification_comment( $comment->comment_ID, $new_status, $old_status );
+	}
+
+	/**
+	 * Detect whether the comment has approved.
+	 *
+	 * @param string $new_status New status of comment.
+	 * @param string $old_status Optional old status of comment.
+	 *
+	 * @return boolean           Returns true if the comment has approved.
+	 */
+	protected function has_approved( $new_status, $old_status = null ) {
+		$approved = false;
+		$approved_statuses = array( '1', 'approved', 'approve' );
+		if ( ! in_array( $old_status, $approved_statuses, true ) && in_array( $new_status, $approved_statuses, true ) ) {
+			$approved = true;
+		}
+		return $approved;
 	}
 
 	/**
 	 * Nofity users when publish a comment.
 	 *
-	 * @param int      $id Comment ID.
-	 * @param stdClass $id Comment data.
+	 * @param int    $id Comment ID.
+	 * @param string $new_status New status of comment.
+	 * @param string $old_status Optional old status of comment.
 	 *
 	 * @return void
 	 */
-	public function send_notification_comment( $id, $comment ) {
-		$settings        = get_option( 'notify_users_email' );
-		$emails          = $this->notification_list( $settings['send_to_users'], $settings['send_to'] );
-		$subject_comment = $this->apply_comment_placeholders( $settings['subject_comment'], $comment );
-		$body_comment    = $this->apply_comment_placeholders( $settings['body_comment'], $comment );
-		$headers 		 = array(
-			'Content-Type: text/html; charset=UTF-8',
-			'Bcc: ' . implode( ',', $emails )
-		);
+	public function send_notification_comment( $id, $new_status, $old_status = null ) {
+		$has_approved = $this->has_approved( $new_status, $old_status );
+        $allowed_statuses = apply_filters( 'notify_users_email_allowed_comment_statuses', $has_approved, $new_status, $old_status );
+        if ( $allowed_statuses ) {
+			$comment         = get_comment( $id );
+			$settings        = get_option( 'notify_users_email' );
+			$emails          = $this->notification_list( $settings['send_to_users'], $settings['send_to'] );
+			$subject_comment = $this->apply_comment_placeholders( $settings['subject_comment'], $comment );
+			$body_comment    = $this->apply_comment_placeholders( $settings['body_comment'], $comment );
+			$headers 		 = array(
+				'Content-Type: text/html; charset=UTF-8',
+				'Bcc: ' . implode( ',', $emails )
+			);
 
-		// Send the emails.
-		if ( apply_filters( 'notify_users_email_use_wp_mail', true ) ) {
-			wp_mail( '', $subject_comment, $body_comment, $headers );
-		} else {
-			do_action( 'notify_users_email_custom_mail_engine', $emails, $subject_comment, $body_comment );
+			// Send the emails.
+			if ( apply_filters( 'notify_users_email_use_wp_mail', true ) ) {
+				wp_mail( '', $subject_comment, $body_comment, $headers );
+			} else {
+				do_action( 'notify_users_email_custom_mail_engine', $emails, $subject_comment, $body_comment );
+			}
 		}
 	}
 }
